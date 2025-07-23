@@ -59,11 +59,16 @@ async def edit_todo(db: db_dependency, todo_id: int, content: schemas.TodoUpdate
     return update_todo
     
 
+@app.delete("/todo/{todo_id}", status_code=status.HTTP_200_OK)
+async def delete_todo(db: db_dependency, todo_id: int):
+    todo_model_ref = db.query(Todos).filter(Todos.id == todo_id)
+    todo_model_instance = todo_model_ref.first()
 
+    if not todo_model_instance:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail = f"Task with id = {todo_id} not found")
 
-
-
-
+    todo_model_ref.delete(synchronize_session=False)
+    db.commit()
 
     
     
