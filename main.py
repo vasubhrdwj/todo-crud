@@ -4,10 +4,15 @@ from typing import Annotated
 from database import engine, SessionLocal
 from sqlalchemy.orm import Session
 import schemas
+from routers import auth
+
 
 app = FastAPI()
 
 Base.metadata.create_all(bind = engine)
+
+
+app.include_router(auth.router) 
 
 def get_db():
     db = SessionLocal()
