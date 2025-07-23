@@ -16,3 +16,15 @@ class TodoUpdate(BaseModel):
 class TodoResponse(TodoRequest):
     class Config:
         from_attributes = True
+
+
+
+#  Users :
+
+class CreateUserRequest(BaseModel):
+    username: str
+    email: str
+    first_name: str
+    last_name: str
+    password: str
+    role: str

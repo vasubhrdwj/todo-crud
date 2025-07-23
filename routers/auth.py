@@ -1,9 +1,12 @@
 from fastapi import APIRouter
+from pydantic
 
 router = APIRouter()
 
 
-@router.get("/auth/")
-async def get_user():
+
+
+@router.post("/auth/")
+async def create_user():
     return {'user' : 'authenticated'}
 
